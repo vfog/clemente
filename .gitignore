@@ -1,0 +1,6 @@
+# Ignore sublime files
+*.sublime-project
+*.sublime-workspace
+
+# Ignore generate gems
+*.gem

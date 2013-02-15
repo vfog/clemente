@@ -2,8 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'Date'
 
-# class Clemente::Client
-class Client
+class Clemente::Client
 
 protected
 

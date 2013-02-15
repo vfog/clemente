@@ -1,8 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
 
-require_relative './clemente/mini_scoreboard_client'
-
 class Clemente
 	
 	def hello
@@ -14,5 +12,4 @@ class Clemente
 
 end
 
-c = Clemente.new
-c.hello
+require 'clemente/mini_scoreboard_client'
