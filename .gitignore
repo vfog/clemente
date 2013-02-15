@@ -4,3 +4,6 @@
 
 # Ignore generate gems
 *.gem
+
+# Ignore OSX files
+.DS_Store
