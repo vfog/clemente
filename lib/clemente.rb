@@ -1,27 +1,18 @@
 require 'nokogiri'
 require 'open-uri'
 
-require 'Clemente/client'
+require_relative './clemente/mini_scoreboard_client'
 
 class Clemente
 	
 	def hello
-		doc = Nokogiri::XML(open('http://gd2.mlb.com/components/game/mlb/year_2012/month_06/day_10/scoreboard.xml'))
-		doc.xpath('//go_game').each do |g|
-			puts g.xpath('.//game/@id')
-			
-			g.xpath('.//team').each do |t|
-				team_name = t.attr('name')
+		mini_scoreboard = MiniScoreboardClient.new #Clemente::MiniScoreboardClient.new
+		mini_scoreboard.get_mini_scoreboard(Date.new(2012, 9, 11))
 
-				gt = t.xpath('.//gameteam')
-				runs = gt.attr('R')
-				hits = gt.attr('H')
-				errors = gt.attr('E')
-
-				puts "#{team_name}: #{runs} #{hits} #{errors}"
-			end
-			puts ''
-		end
+		return
 	end
 
 end
+
+c = Clemente.new
+c.hello
