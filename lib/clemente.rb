@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 # require 'clemente/mini_scoreboard_client'
 
-require 'clemente/client'
+require 'clemente/mini_scoreboard_client'
 
 module Clemente
 	
@@ -12,8 +12,8 @@ module Clemente
 
     puts 'hello world'
 
-    client = Clemente::Client.new
-    client.hello
+    client = Clemente::MiniScoreboardClient.new
+    client.get_mini_scoreboard(Date.new(2012, 9, 11))
 
 		return
 	end

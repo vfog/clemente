@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files = [ 
     "lib/clemente.rb",
     "lib/clemente/client.rb",
+    "lib/clemente/mini_scoreboard_client.rb",
   ]
   s.add_runtime_dependency 'nokogiri', '~> 1.5', '>= 1.5.6'
   # s.license     = 'MIT'
