@@ -1,30 +1,50 @@
+require 'faraday'
 require 'nokogiri'
-require 'open-uri'
 require 'Date'
+
+require 'clemente/client/mini_scoreboard'
 
 module Clemente
   class Client
 
-    def hello
-      puts "Client hello"
+    include Clemente::Client::MiniScoreboard
+
+    def initialize(endpoint = 'http://gd2.mlb.com/components/game/mlb/')
+      @endpoint = endpoint
+      @conn = Faraday.new
+      @conn.url_prefix = @endpoint
+      yield @conn if block_given?
     end
 
-  protected
-
-    def fetch(path, date = Date.today)
-      doc = get_document_stream(get_url(path, date))    
-      Nokogiri::XML(doc)
-    end 
-
-  private
-
-    def get_url(path, date)
-      "http://gd2.mlb.com/components/game/mlb/year_%d/month_%02d/day_%02d/%s" % [date.year, date.month, date.day, path]
+    def relative_path_for_date(date = Date.today)
+      "year_%d/month_%02d/day_%02d" % [date.year, date.month, date.day]
     end
 
-    def get_document_stream(url)
-      open(url)
+    def call(path)
+      puts "calling %s%s" % [@endpoint, path]
+
+      res = @conn.send :get, path
+      doc = Nokogiri::XML(res.body)
+
+      yield doc if block_given?
     end
+
+  # protected
+  #
+  #   def fetch(path, date = Date.today)
+  #     doc = get_document_stream(get_url(path, date))
+  #     Nokogiri::XML(doc)
+  #   end
+
+  # private
+  #
+  #   def get_url(path, date)
+  #     "http://gd2.mlb.com/components/game/mlb/year_%d/month_%02d/day_%02d/%s" % [date.year, date.month, date.day, path]
+  #   end
+  #
+  #   def get_document_stream(url)
+  #     open(url)
+  #   end
 
   end
 end
