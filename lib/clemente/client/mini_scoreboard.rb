@@ -1,4 +1,3 @@
-
 module Clemente
   class Client
 
