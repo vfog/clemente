@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
     "lib/clemente/mini_scoreboard_client.rb",
   ]
   s.add_runtime_dependency 'nokogiri', '~> 1.5', '>= 1.5.6'
+  s.add_runtime_dependency 'faraday', '~> 0.9', '>= 0.9.0'
   s.license     = 'MIT'
   s.homepage    = 'http://rubygems.org/gems/clemente'
 end
