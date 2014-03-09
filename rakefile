@@ -1,0 +1,36 @@
+require 'rubygems'
+require 'rake'
+
+task :default => :console
+
+def name
+  @name ||= Dir['*.gemspec'].first.split('.').first
+end
+
+desc "Open an irb session preloaded with this library"
+task :console do
+  sh "irb -r ./lib/#{name}.rb"
+end
+
+desc "Cleans up any .gem locally"
+task :clean do
+  if Dir['*.gem'].any? then
+    sh "rm *.gem"
+  end
+end
+
+desc "Builds the clemente-X.X.X.gem"
+task :gem => [:clean] do |t|
+  sh "gem build #{name}.gemspec"
+end
+
+desc "Install clemente-X.X.X.gem locally"
+multitask :install => [:gem, :uninstall] do |t|
+  gem = Dir['*.gem'].first
+  sh "gem install ./#{gem}"
+end
+
+desc "Uninstalls clemente-X.X.X.gem"
+task :uninstall do
+  sh "gem uninstall #{name}"
+end

@@ -1,9 +1,7 @@
-require 'nokogiri'
-require 'open-uri'
-
 require 'clemente/client'
 
 module Clemente
+	VERSION = "0.0.1"
 
 	class << self
 
