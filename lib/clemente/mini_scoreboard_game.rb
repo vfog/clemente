@@ -86,7 +86,11 @@ module Clemente
                     :away_team_so,
                     :home_team_so,
                     :home_audio_link,
-                    :away_audio_link]
+                    :away_audio_link,
+                    :tv_station,
+                    :mlbtv_link,
+                    :reason,
+                    :runner_on_base_status ]
 
     @@attributes.each do |attr|
       class_eval { attr_reader "#{attr}" }
@@ -96,6 +100,8 @@ module Clemente
       params.each do |key, value|
         if @@attributes.include? key.to_sym then
           instance_variable_set("@#{key}", value)
+        else
+          puts "MiniScoreboard attribute #{key} not found"
         end
       end
     end
