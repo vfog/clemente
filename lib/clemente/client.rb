@@ -2,11 +2,13 @@ require 'faraday'
 require 'nokogiri'
 require 'Date'
 
+require 'clemente/client/boxscore'
 require 'clemente/client/mini_scoreboard'
 
 module Clemente
   class Client
 
+    include Clemente::Client::Boxscore
     include Clemente::Client::MiniScoreboard
 
     def initialize(endpoint = 'http://gd2.mlb.com/components/game/mlb/')
@@ -27,6 +29,10 @@ module Clemente
       doc = Nokogiri::XML(res.body)
 
       yield doc if block_given?
+    end
+
+    def attribute_hash(node)
+      node.attributes.map {|key, value| [key, value.value]}
     end
   end
 end

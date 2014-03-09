@@ -16,9 +16,7 @@ module Clemente
 
           # get all the games
           doc.xpath('//game').each do |game|
-            params = game.attributes.map do |key, value|
-              [key, value.value]
-            end
+            params = attribute_hash game
             games.push(Clemente::MiniScoreboardGame.new(params))
           end
 
