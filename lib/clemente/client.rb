@@ -28,11 +28,41 @@ module Clemente
       res = @conn.send :get, path
       doc = Nokogiri::XML(res.body)
 
-      yield doc if block_given?
+      # yield doc if block_given?
+      doc_to_hash doc
     end
 
     def attribute_hash(node)
       node.attributes.map {|key, value| [key, value.value]}
+    end
+
+    private
+
+    def doc_to_hash doc
+      node_to_hash doc.root
+    end
+
+    def node_to_hash node
+
+        hash = Hash[ node.attributes.map {|key, value| [key.to_sym, value.value]} ]
+
+        node.children.each do |child|
+          unless child.name == '#cdata-section' || child.name == 'text'
+            child_hash = node_to_hash child
+
+            if hash[child.name.to_sym]
+              if hash[child.name.to_sym].is_a?(Object::Array)
+                hash[child.name.to_sym] = hash[child.name.to_sym] << child_hash
+              else
+                hash[child.name.to_sym] = [hash[child.name.to_sym], child_hash]
+              end
+            else
+              hash[child.name.to_sym] = child_hash
+            end
+          end
+        end
+
+        return hash
     end
   end
 end

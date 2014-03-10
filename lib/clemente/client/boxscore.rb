@@ -7,27 +7,29 @@ module Clemente
         relative_path = relative_path_for_date(date)
         path = "#{relative_path}/#{game_id}/boxscore.xml"
 
-        game_boxscore = nil
+        call path
 
-        call path do |doc|
-          boxscore_params = attribute_hash doc.root
-          puts boxscore_params
-
-          # get our linescore
-          linescore doc.xpath('//linescore').first
-
-          # get the pitchers
-          doc.xpath("//pitching").each do |pitching|
-            team_pitching pitching
-          end
-
-          # get the batters
-          doc.xpath("//batting").each do |batting|
-            team_batting bating
-          end
-        end
-
-        game_boxscore
+        # game_boxscore = nil
+        #
+        # call path do |doc|
+        #   boxscore_params = attribute_hash doc.root
+        #   puts boxscore_params
+        #
+        #   # get our linescore
+        #   linescore doc.xpath('//linescore').first
+        #
+        #   # get the pitchers
+        #   doc.xpath("//pitching").each do |pitching|
+        #     team_pitching pitching
+        #   end
+        #
+        #   # get the batters
+        #   doc.xpath("//batting").each do |batting|
+        #     team_batting bating
+        #   end
+        # end
+        #
+        # game_boxscore
       end
 
       private

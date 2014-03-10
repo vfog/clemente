@@ -9,20 +9,25 @@ module Clemente
       def mini_scoreboard(date = Date.today)
         path = "%s/%s" % [relative_path_for_date(date), "miniscoreboard.xml"]
 
-        games = []
 
-        # create miniscoreboard games
-        call path do |doc|
+        # todo: we should just take the XML returned and convert it to a hash directly
 
-          # get all the games
-          doc.xpath('//game').each do |game|
-            params = attribute_hash game
-            games.push(Clemente::MiniScoreboardGame.new(params))
-          end
+        # games = []
+        #
+        # # create miniscoreboard games
+        # call path do |doc|
+        #
+        #   # get all the games
+        #   doc.xpath('//game').each do |game|
+        #     params = attribute_hash game
+        #     games.push(Clemente::MiniScoreboardGame.new(params))
+        #   end
+        #
+        # end
+        #
+        # games
 
-        end
-
-        games
+        call path
       end
     end
   end
