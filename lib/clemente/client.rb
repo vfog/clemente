@@ -4,12 +4,14 @@ require 'Date'
 
 require 'clemente/client/boxscore'
 require 'clemente/client/mini_scoreboard'
+require 'clemente/client/scoreboard'
 
 module Clemente
   class Client
 
     include Clemente::Client::Boxscore
     include Clemente::Client::MiniScoreboard
+    include Clemente::Client::Scoreboard
 
     def initialize(endpoint = 'http://gd2.mlb.com/components/game/mlb/')
       @endpoint = endpoint
