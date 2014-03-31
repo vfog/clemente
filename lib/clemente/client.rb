@@ -3,14 +3,20 @@ require 'nokogiri'
 require 'Date'
 
 require 'clemente/client/boxscore'
+require 'clemente/client/game'
+require 'clemente/client/game_events'
 require 'clemente/client/mini_scoreboard'
+require 'clemente/client/players'
 require 'clemente/client/scoreboard'
 
 module Clemente
   class Client
 
     include Clemente::Client::Boxscore
+    include Clemente::Client::Game
+    include Clemente::Client::GameEvents
     include Clemente::Client::MiniScoreboard
+    include Clemente::Client::Players
     include Clemente::Client::Scoreboard
 
     def initialize(endpoint = 'http://gd2.mlb.com/components/game/mlb/')
