@@ -7,7 +7,7 @@ Clemente is Ruby client providing easy access to MLBAM Pitch F/X and related dat
 
 Clemente depends upon the following libraries
 
-- [Nokogiri](http://nokogiri.com)
+- [Nokogiri](http://nokogiri.org)
 - [Faraday](https://github.com/lostisland/faraday)
 
 
