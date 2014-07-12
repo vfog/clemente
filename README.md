@@ -1,6 +1,6 @@
 # Clemente
 
-Clemente is Ruby client providing easy access to MLBAM Pitch F/X and related data. All XML data is converted to Ruby hashes for convenient access.
+Clemente is a Ruby client providing easy access to MLBAM Pitch F/X and related data. All XML data is converted to Ruby hashes for convenient access.
 
 ## Usage
 
